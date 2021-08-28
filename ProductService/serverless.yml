@@ -57,7 +57,18 @@ functions:
       - http:
           method: GET
           path: products
-    # you can add packaging information here
+    package:
+      artifact: bin/Release/netcoreapp3.1/productService.zip
+  getProductById:
+    handler: ProductService::ProductService.Handlers.GetProductByIdHandler::GetProductByIdAsync
+    events:
+      - http:
+          method: GET
+          path: products/{id}
+          request:
+            parameters:
+              paths:
+                id: true
     package:
       artifact: bin/Release/netcoreapp3.1/productService.zip
     #  exclude:
