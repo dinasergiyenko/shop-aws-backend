@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System.Collections.Generic;
+using System.Net;
 using Amazon.Lambda.APIGatewayEvents;
 
 namespace ProductService.Handlers
@@ -30,7 +31,12 @@ namespace ProductService.Handlers
             return new APIGatewayProxyResponse
             {
                 StatusCode = statusCode,
-                Body = body
+                Body = body,
+                Headers = new Dictionary<string, string>
+                {
+                    { "Access-Control-Allow-Origin", "*" },
+                    { "Access-Control-Allow-Credentials", "true" }
+                }
             };
         }
     }
