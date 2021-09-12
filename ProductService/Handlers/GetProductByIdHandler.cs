@@ -22,6 +22,8 @@ namespace ProductService.Handlers
             APIGatewayProxyRequest request,
             ILambdaContext context)
         {
+            Console.WriteLine($"GetProductById: Incoming request {JsonConvert.SerializeObject(request)}.");
+
             if (request.PathParameters == null || !request.PathParameters.ContainsKey("id"))
             {
                 const string errorMessage = "Retrieving of cake failed: no id has been passed.";

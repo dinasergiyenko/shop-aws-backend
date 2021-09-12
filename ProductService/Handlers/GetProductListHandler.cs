@@ -22,6 +22,8 @@ namespace ProductService.Handlers
             APIGatewayProxyRequest request,
             ILambdaContext context)
         {
+            Console.WriteLine($"GetProductList: Incoming request {JsonConvert.SerializeObject(request)}.");
+
             try
             {
                 var cakes = new List<Cake>();
