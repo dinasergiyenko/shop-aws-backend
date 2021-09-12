@@ -28,11 +28,11 @@ provider:
   region: eu-west-1
 
   environment:
-    PG_HOST: task4.cd9znwwbjjn2.eu-west-1.rds.amazonaws.com
-    PG_PORT: 5432
-    PG_DATABASE: shop
-    PG_USERNAME: postgres
-    PG_PASSWORD: postgres
+    PG_HOST:
+    PG_PORT:
+    PG_DATABASE:
+    PG_USERNAME:
+    PG_PASSWORD:
 
 package:
   individually: true
