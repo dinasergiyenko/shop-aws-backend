@@ -27,25 +27,12 @@ provider:
   stage: dev
   region: eu-west-1
 
-# you can add statements to the Lambda function's IAM Role here
-#  iamRoleStatements:
-#    - Effect: "Allow"
-#      Action:
-#        - "s3:ListBucket"
-#      Resource: { "Fn::Join" : ["", ["arn:aws:s3:::", { "Ref" : "ServerlessDeploymentBucket" } ] ]  }
-#    - Effect: "Allow"
-#      Action:
-#        - "s3:PutObject"
-#      Resource:
-#        Fn::Join:
-#          - ""
-#          - - "arn:aws:s3:::"
-#            - "Ref" : "ServerlessDeploymentBucket"
-#            - "/*"
-
-# you can define service wide environment variables here
-#  environment:
-#    variable1: value1
+  environment:
+    PG_HOST:
+    PG_PORT:
+    PG_DATABASE:
+    PG_USERNAME:
+    PG_PASSWORD:
 
 package:
   individually: true
@@ -71,6 +58,15 @@ functions:
             parameters:
               paths:
                 id: true
+    package:
+      artifact: bin/Release/netcoreapp3.1/productService.zip
+  createProduct:
+    handler: ProductService::ProductService.Handlers.CreateProductHandler::CreateProductAsync
+    events:
+      - http:
+          method: POST
+          path: products
+          cors: true
     package:
       artifact: bin/Release/netcoreapp3.1/productService.zip
     #  exclude:

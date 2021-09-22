@@ -1,11 +1,8 @@
 ﻿using System;
-using System.IO;
-using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using ProductService.Services;
+using ProductService.Configuration;
 
 namespace ProductService
 {
@@ -14,7 +11,6 @@ namespace ProductService
         public IServiceProvider Setup()
         {
             var services = new ServiceCollection();
-            services.AddScoped<IProductReaderService, ProductReaderService>();
 
             JsonConvert.DefaultSettings = () => new JsonSerializerSettings
             {
@@ -22,6 +18,7 @@ namespace ProductService
             };
 
             IServiceProvider provider = services.BuildServiceProvider();
+            var configuration = provider.GetService<ILambdaConfiguration>();
 
             return provider;
         }
